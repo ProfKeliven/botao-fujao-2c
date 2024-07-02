@@ -16,16 +16,16 @@ window.mobileCheck = function(){
 }
 
 //definindo estados da posicao do botao no mobile
-let mobile_state = {1: {top: 1, left: 1}, 
+let mobile_states = {1: {top: 1, left: 1}, 
                     2: {top: 1, left: 0},
                     3: {top: 0, left: 0},
                     4: {top: 0, left: 1}
                  }
 //VERIFICADOR DE PARA DIRECIONAR AS FUNCOES
 if (window.mobileCheck()){
-    $("#not").mouseover(mobileHandler)
+    $("#not").on("mouseover", mobileHandler)
 }else{
-    $("body").mousemove(webHandler)
+    $("body").on("mousemove", webHandler)
 }
 //funcao para mobile
 function mobileHandler(event){
@@ -33,8 +33,8 @@ function mobileHandler(event){
     mobileState = mobileState % 4 + 1 //mudando o estado 
     //mudando o css
     $("#not").css({
-        top: '$(mobileState[mobileState].top * 50)%',
-        left: '$(mobileState[mobileState].left * 50)%',
+        top: '$(mobile_states[mobileState].top * 50)%',
+        left: '$(mobile_states[mobileState].left * 50)%',
         position: 'absolute'
     })
 }
@@ -71,8 +71,8 @@ function webHandler(event){
 
     //funcao que vai calcular o algulo do seno e do cosseno (sin e cos)
     function calculateAngle(mouse, center, distance){
-        let sin = Math.abs(mouse.pageY - center.y) /distance
-        let cos = Math.abs(mouse.pageX - center.x)/distance
+        let sin = Math.abs(mouse.pageY - center.centerY) / distance
+        let cos = Math.abs(mouse.pageX - center.centerX)/ distance
         return {sin: sin, cos: cos}
     }
 
